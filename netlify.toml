@@ -1,0 +1,23 @@
+# ADAM'S — impostazioni per Netlify (non serve modificarle)
+[build]
+  publish = "public"
+  functions = "netlify/functions"
+  command = "echo 'ADAMS: nessuna compilazione necessaria'"
+
+[functions]
+  node_bundler = "esbuild"
+
+[[headers]]
+  for = "/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+  for = "/audio/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache"

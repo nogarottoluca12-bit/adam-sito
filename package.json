@@ -1,0 +1,9 @@
+{
+  "name": "adams-sito",
+  "private": true,
+  "type": "module",
+  "description": "ADAM'S Café & Conditorei — sito con memoria su Netlify",
+  "dependencies": {
+    "@netlify/blobs": "^11.1.6"
+  }
+}

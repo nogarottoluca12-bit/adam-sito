@@ -1,0 +1,75 @@
+ADAM'S Café & Conditorei — SITO PER NETLIFY CON MEMORIA
+========================================================
+
+COSA C'È IN QUESTA CARTELLA
+  public/                      il sito (pagina, foto, musica)
+  netlify/functions/api.mjs    la "memoria" del sito (l'equivalente di api.php):
+                               salva prenotazioni, messaggi, richieste di catering,
+                               ordini dello shop, iscrizioni alla newsletter,
+                               tutte le modifiche dell'Area riservata e le foto caricate
+                               (nel cloud di Netlify, "Netlify Blobs")
+  netlify.toml, package.json   impostazioni per Netlify (non toccarle)
+
+IMPORTANTE
+  Netlify esegue la memoria (api.mjs) SOLO se il sito è pubblicato da GitHub
+  (oppure con il programma Netlify CLI). Con il semplice trascinamento della
+  cartella la memoria NON si attiva.
+
+
+METODO CONSIGLIATO — GITHUB (tutto dal browser, una volta sola, ~15 minuti)
+---------------------------------------------------------------------------
+1. Crea un account gratuito su github.com (se non ce l'hai).
+2. In alto a destra "+" > "New repository".
+   Nome: adams-sito · lascia "Private" o "Public" come preferisci · "Create repository".
+3. Nella pagina del repository clicca "uploading an existing file".
+4. Apri la cartella "adams-sito" sul computer, seleziona TUTTO il suo contenuto
+   (cartelle public e netlify, file netlify.toml e package.json) e trascinalo
+   nella pagina di GitHub. Poi in basso "Commit changes".
+   (Se GitHub dice che sono troppi file insieme: carica prima la cartella
+   "public", poi in una seconda volta il resto.)
+5. Vai su app.netlify.com > "Add new project" > "Import an existing project"
+   > "GitHub" > autorizza > scegli "adams-sito".
+6. Nelle impostazioni non cambiare niente (le legge da netlify.toml) > "Deploy".
+   Dopo 1–2 minuti il sito è online.
+7. Prova: apri il sito, in fondo "Area riservata", password: mary.
+   In alto deve comparire «Collegata al server del sito».
+
+Se il sito era già su Netlify con il trascinamento, puoi collegare GitHub
+allo stesso progetto: Project configuration > Build & deploy > "Link repository".
+
+
+EMAIL DI AVVISO A OGNI PRENOTAZIONE / ORDINE (consigliato)
+  1. Project configuration > Forms > "Enable form detection".
+  2. Deploys > "Trigger deploy" > "Deploy site" (ripubblica una volta).
+  3. Project configuration > Notifications > Emails and webhooks >
+     Form submission notifications > Add notification > Email notification >
+     "Any form" > indirizzo email di Sofia.
+  Ogni richiesta arriva così anche per email e resta copiata nella sezione Forms.
+
+
+CAMBIARE LA PASSWORD DELL'AREA RISERVATA
+  Project configuration > Environment variables > Add a variable:
+     Key: ADMIN_PASSWORD     Value: la nuova password
+  Poi Deploys > "Trigger deploy". (Senza questa variabile la password è "mary".)
+
+
+DOVE STANNO I DATI
+  Prenotazioni, messaggi, ordini e foto caricate: nel cloud di Netlify
+  (Netlify Blobs), si vedono e si gestiscono dall'Area riservata del sito.
+  Ripubblicare o aggiornare il sito NON cancella questi dati.
+
+
+AGGIORNARE IL SITO IN FUTURO
+  Su GitHub carica i file nuovi sopra i vecchi ("Add file" > "Upload files"):
+  Netlify ripubblica da solo.
+
+
+METODO ALTERNATIVO PER CHI USA IL TERMINALE
+  Nella cartella adams-sito:   npm install   poi   npx netlify-cli deploy --prod
+
+
+SOLO TRASCINAMENTO (senza memoria completa)
+  Trascinando su Netlify solo la cartella "public", il sito funziona e le
+  richieste arrivano comunque nella sezione Forms di Netlify e per email
+  (attivare "Enable form detection"), ma l'Area riservata non le mostra e
+  le sue modifiche restano solo nel browser di chi le fa.
